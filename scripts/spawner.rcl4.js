@@ -48,10 +48,10 @@ var spawnerRCL4 = function(spawn){
     if (this.spawn.room.memory.extentions.length >= 5) this.creepTypes.miner.body = [WORK,WORK,WORK,WORK,MOVE,MOVE]
     if (this.spawn.room.memory.extentions.length >= 10){
         //800 energy >=
-        this.creepTypes.builder.body = [WORK,WORK,WORK, MOVE,MOVE,MOVE,MOVE,MOVE,MOVE, CARRY,CARRY,CARRY,CARRY,CARRY,CARRY]
+        this.creepTypes.builder.body = [MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,WORK,WORK,CARRY,CARRY,CARRY,CARRY,CARRY]
         this.creepTypes.miner.body = [WORK,WORK,WORK,WORK,WORK,WORK,WORK, MOVE,MOVE]
         this.creepTypes.upgrader.body = [WORK,WORK,WORK,WORK, MOVE,MOVE,MOVE,MOVE, CARRY,CARRY,CARRY,CARRY]
-        this.creepTypes.harvester.body = [WORK, MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE,MOVE, CARRY,CARRY,CARRY,CARRY,CARRY,CARRY]
+        this.creepTypes.harvester.body = [MOVE,MOVE,MOVE,MOVE,MOVE,WORK,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY,CARRY]
         
     }
    
