@@ -11,6 +11,8 @@ var test = require('test');
 
 module.exports.loop = function () {
     
+    console.log('GitHub');
+    
     var t = new test();
     
     var roomModels = [];
