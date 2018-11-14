@@ -37,8 +37,9 @@ var creepBase = function(creep){
                 this.creep.pos,
                 this.creep.room.memory.sources[name].pos,                         
                 ).cost;
-        }
+        
         Memory.DEBUG = energySource;
+        }
         //получить список источников энергии
         //оценить расстояние до них 
         //оценить запас энергии в них
