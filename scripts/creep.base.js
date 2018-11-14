@@ -39,9 +39,9 @@ var creepBase = function(creep){
                 ).cost;
             energySource.energyAvaible = this.creep.room.memory.sources[name].energy;
             energySource.priority = 1;
-            sourceMatrix.push(energySource);
+            sourcesMatrix.push(energySource);
         }
-        Memory.DEBUG = sourceMatrix;
+        Memory.DEBUG = sourcesMatrix;
         //получить список источников энергии
         //оценить расстояние до них 
         //оценить запас энергии в них
