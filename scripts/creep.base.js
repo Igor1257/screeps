@@ -22,27 +22,41 @@ var creepBase = function(creep){
 	        this.creep.memory.harvest = false;
 	    }
     };
-    this.getEnergy = function(){
-        var energy_sources = []
-        energy_sources = energy_sources.concat(this.creep.room.memory.sources)
-        energy_sources = energy_sources.concat(this.creep.room.memory.containers)
-        for (var en in energy_sources ){
-            console.log('path cost:' + PathFinder.search(this.creep.pos,this.creep.room.memory.containers[1]).cost)
+    this.getEnergySource = function(){
+        let sourcesMatrix = [];
+        for (let name in this.creep.room.memory.sources){
+            let energySource = {
+                source : null,
+                pathCost: null,
+                energyAvaible: null,
+                priority: null,
+                value: null
+            }
+            energySource.source = this.creep.room.memory.sources[name];
+            energySource.pathCost = PathFinder.search(
+                this.creep.pos,
+                this.creep.room.memory.sources[name].pos,                         
+                ).cost;
         }
-        
-       
+        Memory.DEBUG = energySource;
+        //получить список источников энергии
+        //оценить расстояние до них 
+        //оценить запас энергии в них
+        //оценить время жизни источника (упавшие ресурсы исчезают)
+        //выбрать оптимальный и вернуть его
+        return null;
+    }
+    this.getEnergy = function(){
+        if (Game.time%10 == 0){this.getEnergySource()};
         if (this.pickupResources()) {
             //console.log('pickup');
             return;
         }
-        
         if (!this.isContainersEmpty()){
             //console.log('container');
             this.withdrawContainers();
             return;
         }
-        
-        
         //console.log('source')
 	    this.harvestClosest();
     }
