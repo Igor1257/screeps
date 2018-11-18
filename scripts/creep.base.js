@@ -58,8 +58,8 @@ var creepBase = function(creep){
 
         Memory.DEBUG = sourcesMatrix;
         let result = {value : 0, name : null};
-        for (let name in sourceMatrix){
-            if (sourceMatrix[name].value > result.value){
+        for (let name in sourcesMatrix){
+            if (sourcesMatrix[name].value > result.value){
                 result.name = name;
             }
         }
@@ -68,7 +68,7 @@ var creepBase = function(creep){
         //оценить запас энергии в них
         //оценить время жизни источника (упавшие ресурсы исчезают)
         //выбрать оптимальный и вернуть его
-        return sourceMatrix[result.name].source;
+        return sourcesMatrix[result.name].source;
     }
     this.getStorageValue = function(){
         let value = 4;
