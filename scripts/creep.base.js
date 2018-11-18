@@ -57,12 +57,18 @@ var creepBase = function(creep){
         //storages
 
         Memory.DEBUG = sourcesMatrix;
+        let result = {value : 0, name : null};
+        for (let name in sourceMatrix){
+            if (sourceMatrix[name].value > result.value){
+                result.name = name;
+            }
+        }
         //получить список источников энергии
         //оценить расстояние до них 
         //оценить запас энергии в них
         //оценить время жизни источника (упавшие ресурсы исчезают)
         //выбрать оптимальный и вернуть его
-        return null;
+        return sourceMatrix[result.name].source;
     }
     this.getStorageValue = function(){
         let value = 4;
@@ -88,7 +94,7 @@ var creepBase = function(creep){
             
     }
     this.getEnergy = function(){
-        if (Game.time%10 == 0){this.getEnergySource()};
+        if (Game.time%10 == 0){this.creep.memory.energySource = this.getEnergySource()};
         if (this.pickupResources()) {
             //console.log('pickup');
             return;
