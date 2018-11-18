@@ -24,23 +24,38 @@ var creepBase = function(creep){
     };
     this.getEnergySource = function(){
         let sourcesMatrix = [];
+        // energy sources
         for (let name in this.creep.room.memory.sources){
             let energySource = {
                 source : null,
-                pathCost: null,
-                energyAvaible: null,
-                priority: null,
                 value: null
             }
             energySource.source = this.creep.room.memory.sources[name];
-            energySource.pathCost = PathFinder.search(
-                this.creep.pos,
-                this.creep.room.memory.sources[name].pos,                         
-                ).cost;
-            energySource.energyAvaible = this.creep.room.memory.sources[name].energy;
-            energySource.priority = 1;
+            energySource.value  = this.getSourceValue(this.creep.room.memory.sources[name]);
             sourcesMatrix.push(energySource);
         }
+        //containers
+        for (let name in this.creep.room.memory.containers){
+             let energySource = {
+                source : null,
+                value: null
+            }
+            energySource.source =  this.creep.room.memory.containers[name];
+            energySource.value  = this.getContainerValue(this.creep.room.memory.containers[name]);
+            sourcesMatrix.push(energySource);
+        };
+        //droppedEnergyResourceValue
+        for (let name in this.creep.room.memory.dropped_resources){
+             let energySource = {
+                source : null,
+                value: null
+            }
+            energySource.source =  this.creep.room.memory.dropped_resources[name];
+            energySource.value  = this.getDroppedEnergyValue(this.creep.room.memory.dropped_resources[name]);
+            sourcesMatrix.push(energySource);
+        };
+        //storages
+
         Memory.DEBUG = sourcesMatrix;
         //получить список источников энергии
         //оценить расстояние до них 
@@ -48,6 +63,29 @@ var creepBase = function(creep){
         //оценить время жизни источника (упавшие ресурсы исчезают)
         //выбрать оптимальный и вернуть его
         return null;
+    }
+    this.getStorageValue = function(){
+        let value = 4;
+        return value;
+    }
+    this.getDroppedEnergyValue = function(dropped_resource){
+        let value = 3;
+        return value;
+    }
+    this.getContainerValue = function(controller){
+        let value = 2;
+        return value;
+    }
+    this.getSourceValue = function(){
+        let value = 1;
+        return value;
+        /*energySource.pathCost = PathFinder.search(
+                this.creep.pos,
+                this.creep.room.memory.sources[name].pos,                         
+                ).cost;
+            energySource.energyAvaible = this.creep.room.memory.sources[name].energy;
+            */
+            
     }
     this.getEnergy = function(){
         if (Game.time%10 == 0){this.getEnergySource()};
