@@ -66,7 +66,7 @@ var creepBase = function(creep){
                 result.name = name;
             }
         }
-        return sourcesMatrix[result.name].source;
+        return sourcesMatrix[result.name];
     }
     this.getStorageValue = function(){
         let value = 4;
