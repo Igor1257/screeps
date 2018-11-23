@@ -93,7 +93,7 @@ var creepBase = function(creep){
     }
     this.getEnergy = function(){
         this.getEnergyFromSource();
-        if (this.pickupResources()) {
+        /*if (this.pickupResources()) {
             //console.log('pickup');
             return;
         }
@@ -103,11 +103,18 @@ var creepBase = function(creep){
             return;
         }
         //console.log('source')
-	    this.harvestClosest();
+	    this.harvestClosest();*/
     }
     this.getEnergyFromSource = function(){
         console.log('getEnergyFromSource');
         this.creep.memory.source = this.getEnergySource(); 
+        let currentSource = this.creep.memory.source;
+        if (currentSource.type == 'dropped_energies') this.pickupResource(currentSource.source);
+        
+    }
+    this.pickupResource = function(target){
+        if(this.creep.pickup(target) == ERR_NOT_IN_RANGE){
+                this.creep.moveTo(target, {visualizePathStyle: {stroke: '##fff311'}});    
     }
     this.moveToClosestSpawn = function(){
         var spawns = this.creep.room.find(FIND_STRUCTURES, {
