@@ -93,24 +93,12 @@ var creepBase = function(creep){
     }
     this.getEnergy = function(){
         this.getEnergyFromSource();
-        /*if (this.pickupResources()) {
-            //console.log('pickup');
-            return;
-        }
-        if (!this.isContainersEmpty()){
-            //console.log('container');
-            this.withdrawContainers();
-            return;
-        }
-        //console.log('source')
-	    this.harvestClosest();*/
     }
     this.getEnergyFromSource = function(){
         console.log('getEnergyFromSource');
         this.creep.memory.source = this.getEnergySource(); 
         let currentSource = this.creep.memory.source;
         if (currentSource.type == 'dropped_energies') this.pickupResource(currentSource.source);
-        
     }
     this.pickupResource = function(target){
         if(this.creep.pickup(target) == ERR_NOT_IN_RANGE){
