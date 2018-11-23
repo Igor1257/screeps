@@ -102,7 +102,8 @@ var creepBase = function(creep){
     }
     this.pickupResource = function(target){
         if(this.creep.pickup(target) == ERR_NOT_IN_RANGE){
-                this.creep.moveTo(target, {visualizePathStyle: {stroke: '##fff311'}});    
+                this.creep.moveTo(target, {visualizePathStyle: {stroke: '##fff311'}});
+        }
     }
     this.moveToClosestSpawn = function(){
         var spawns = this.creep.room.find(FIND_STRUCTURES, {
