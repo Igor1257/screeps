@@ -107,7 +107,7 @@ var creepBase = function(creep){
     }
     this.getEnergyFromSource = function(){
         console.log('getEnergyFromSource');
-        this.creep.room.memory.source = this.getEnergySource(); 
+        this.creep.memory.source = this.getEnergySource(); 
     }
     this.moveToClosestSpawn = function(){
         var spawns = this.creep.room.find(FIND_STRUCTURES, {
