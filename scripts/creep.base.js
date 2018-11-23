@@ -28,6 +28,7 @@ var creepBase = function(creep){
         for (let name in this.creep.room.memory.sources){
             let energySource = {
                 source : null,
+                type : 'source',
                 value: null
             }
             energySource.source = this.creep.room.memory.sources[name];
@@ -38,6 +39,7 @@ var creepBase = function(creep){
         for (let name in this.creep.room.memory.containers){
              let energySource = {
                 source : null,
+                type : 'container',
                 value: null
             }
             energySource.source =  this.creep.room.memory.containers[name];
@@ -48,6 +50,7 @@ var creepBase = function(creep){
         for (let name in this.creep.room.memory.dropped_resources){
              let energySource = {
                 source : null,
+                type: 'dropped_energy',
                 value: null
             }
             energySource.source =  this.creep.room.memory.dropped_resources[name];
@@ -63,11 +66,6 @@ var creepBase = function(creep){
                 result.name = name;
             }
         }
-        //получить список источников энергии
-        //оценить расстояние до них 
-        //оценить запас энергии в них
-        //оценить время жизни источника (упавшие ресурсы исчезают)
-        //выбрать оптимальный и вернуть его
         return sourcesMatrix[result.name].source;
     }
     this.getStorageValue = function(){
@@ -94,7 +92,7 @@ var creepBase = function(creep){
             
     }
     this.getEnergy = function(){
-        if (Game.time%10 == 0){this.creep.memory.energySource = this.getEnergySource()};
+        this.getEnergyFromSource();
         if (this.pickupResources()) {
             //console.log('pickup');
             return;
@@ -106,6 +104,9 @@ var creepBase = function(creep){
         }
         //console.log('source')
 	    this.harvestClosest();
+    }
+    this.getEnergyFromSource = function(){
+         if (this.creep.room.memory.source == null) this.creep.room.memory.source = this.getEnergySource(); 
     }
     this.moveToClosestSpawn = function(){
         var spawns = this.creep.room.find(FIND_STRUCTURES, {
