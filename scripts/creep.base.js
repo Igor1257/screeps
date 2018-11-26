@@ -100,7 +100,7 @@ var creepBase = function(creep){
         //console.log('getEnergyFromSource');
         this.creep.memory.source = this.getEnergySource(); 
         let currentSource = this.creep.memory.source;
-        if (currentSource.type == 'dropped_energies') this.pickupResource(currentSource.source);
+        if (currentSource.type == 'dropped_energy') this.pickupResource(currentSource.source);
         if (currentSource.type == 'source') this.harvestTarget(currentSource.source);
     }
     this.pickupResource = function(target){
