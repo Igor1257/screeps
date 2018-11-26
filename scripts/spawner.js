@@ -80,12 +80,14 @@ var spawner = function(spawn){
         else return false;
     }
     this.isHarvesterRequired = function(){
+        console.log('harvesters exist: ' + this.creepTypes['harvester'].exist);
+        console.log('harvesters limit: ' + this.creepTypes['harvester'].limit);
         if (this.creepTypes['harvester'].exist < this.creepTypes['harvester'].limit) return true;
         else return false;
     }
     this.isBaseHarvesterRequired = function(){
         console.log('creeps in room: ' + this.creepsInCurrentRoom);
-        if (this.creepsInCurrentRoom < 0) return true;
+        if (this.creepsInCurrentRoom == 0) return true;
         else return false;
     }
     this.recycleCreep = function(){
