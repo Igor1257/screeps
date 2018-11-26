@@ -1,7 +1,15 @@
 var spawner = function(spawn){
     this.spawn = spawn;
+    this.creepsInCurrentRoom = 0;
     this.room = '';
     this.creepTypes = {
+            baseharvester : {
+                limit: 1,
+                exist: 0,
+                body: [WORK,MOVE,MOVE,MOVE,CARRY],
+                namePrevix: 'harvester',
+                role: 'harvester'
+            },
             harvester : {
                 limit: 1,
                 exist: 0,
@@ -61,6 +69,7 @@ var spawner = function(spawn){
                 if (Game.creeps[name].memory.role == this.creepTypes[typeName].role && Game.creeps[name].room.name == this.room.name)
                 {
                     this.creepTypes[typeName].exist += 1;
+                    this.creepsInCurrentRoom += 1;
                     //console.log(typeName + ' ' + this.creepTypes[typeName].exist )
                 }
     }; 
@@ -74,7 +83,11 @@ var spawner = function(spawn){
         if (this.creepTypes['harvester'].exist < this.creepTypes['harvester'].limit) return true;
         else return false;
     }
-     this.recycleCreep = function(){
+    this.isBaseHarvesterRequired = function(){
+        if (this.creepsInCurrentRoom == 0) return true;
+        else return false;
+    }
+    this.recycleCreep = function(){
         for(var name in Game.creeps) {
             var creep = Game.creeps[name];
             if (creep.memory.ill && creep.room.name == this.room.name)  {
@@ -156,21 +169,12 @@ var spawner = function(spawn){
         console.log('all miners:' + miners)
         //
     }
-    /*this.spawnCreepsDefined = function(typeName){
-        var cr = this.creepTypes[typeName];
-        if (cr.exist < cr.limit){
-            this.spawnCreep(cr,{harvest:true});
-        }; 
-    }*/
-  
-   
-   
     this.run = function() {
         this.room = this.spawn.room;
         if (Game.time % 10 == 0) this.report();
         this.cleanMemory();
         this.countCreeps();
-        
+        if (this.isBaseHarvesterRequired) this.spawnCreep(this.creepTypes['baseharvester'],{role:'harvester', harvest:true});
         if ( this.isHarvesterRequired()) this.spawnCreep(this.creepTypes['harvester'],{role:'harvester', harvest:true});
         else {
             if (this.isMinerRequired()) this.spawnCreepMiner();
@@ -178,7 +182,5 @@ var spawner = function(spawn){
         }
         this.renewCreep();
     };
-    
 }
-
 module.exports = spawner;
