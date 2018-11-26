@@ -84,7 +84,8 @@ var spawner = function(spawn){
         else return false;
     }
     this.isBaseHarvesterRequired = function(){
-        if (this.creepsInCurrentRoom == 0) return true;
+        console.log('creeps in room: ' + this.creepsInCurrentRoom);
+        if (this.creepsInCurrentRoom < 0) return true;
         else return false;
     }
     this.recycleCreep = function(){
