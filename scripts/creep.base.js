@@ -101,7 +101,7 @@ var creepBase = function(creep){
         this.creep.memory.source = this.getEnergySource(); 
         let currentSource = this.creep.memory.source;
         if (currentSource.type == 'dropped_energies') this.pickupResource(currentSource.source);
-        if (currentSource.type == 'source') this.harvestTarget(currentSource.sources);
+        if (currentSource.type == 'source') this.harvestTarget(currentSource.source);
     }
     this.pickupResource = function(target){
         if(this.creep.pickup(target) == ERR_NOT_IN_RANGE){
