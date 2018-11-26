@@ -66,6 +66,8 @@ var creepBase = function(creep){
                 result.name = name;
             }
         }
+        console.log('result.name: ' + result.name)
+        console.log('sourcesMatrix item: ' + sourcesMatrix[result.name])
         return sourcesMatrix[result.name];
     }
     this.getStorageValue = function(){
@@ -95,11 +97,11 @@ var creepBase = function(creep){
         this.getEnergyFromSource();
     }
     this.getEnergyFromSource = function(){
-        console.log('getEnergyFromSource');
+        //console.log('getEnergyFromSource');
         this.creep.memory.source = this.getEnergySource(); 
         let currentSource = this.creep.memory.source;
         if (currentSource.type == 'dropped_energies') this.pickupResource(currentSource.source);
-        if (currentSource.type == 'source') this.harvestClosest(currentSource.sources);
+        if (currentSource.type == 'source') this.harvestTarget(currentSource.sources);
     }
     this.pickupResource = function(target){
         if(this.creep.pickup(target) == ERR_NOT_IN_RANGE){
