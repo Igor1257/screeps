@@ -153,6 +153,7 @@ var creepBase = function(creep){
         }
     };
     this.harvestTarget = function(target){
+        console.log('harvest target');
         if(this.creep.harvest(target) == ERR_NOT_IN_RANGE) {
             this.creep.moveTo(target, {visualizePathStyle: {stroke: '#ffaa00'}});
         }
