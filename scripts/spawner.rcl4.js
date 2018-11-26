@@ -2,6 +2,13 @@ var spawner = require('spawner');
 var spawnerRCL4 = function(spawn){
     this.spawn = spawn;
     this.creepTypes = {
+            baseharvester : {
+                limit: 1,
+                exist: 0,
+                body: [WORK,MOVE,MOVE,MOVE,CARRY],
+                namePrevix: 'harvester',
+                role: 'harvester'
+            },
             harvester : {
                 limit: 2,
                 exist: 0,
