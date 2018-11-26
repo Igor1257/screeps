@@ -66,8 +66,8 @@ var creepBase = function(creep){
                 result.name = name;
             }
         }
-        console.log('result.name: ' + result.name)
-        console.log('sourcesMatrix item: ' + sourcesMatrix[result.name])
+        //console.log('result.name: ' + result.name)
+        //console.log('sourcesMatrix item: ' + sourcesMatrix[result.name])
         return sourcesMatrix[result.name];
     }
     this.getStorageValue = function(){
