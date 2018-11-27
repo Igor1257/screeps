@@ -174,8 +174,8 @@ var spawner = function(spawn){
         if (Game.time % 10 == 0) this.report();
         this.cleanMemory();
         this.countCreeps();
-        console.log('is base harvester required: ' + this.isBaseHarvesterRequired)
-        if (this.isBaseHarvesterRequired) this.spawnCreep(this.creepTypes['baseharvester'],{role:'harvester', harvest:true});
+        console.log('is base harvester required: ' + this.isBaseHarvesterRequired())
+        if (this.isBaseHarvesterRequired()) this.spawnCreep(this.creepTypes['baseharvester'],{role:'harvester', harvest:true});
         if (this.isHarvesterRequired()) this.spawnCreep(this.creepTypes['harvester'],{role:'harvester', harvest:true});
         else {
             if (this.isMinerRequired()) this.spawnCreepMiner();
