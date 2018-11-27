@@ -165,19 +165,16 @@ var spawner = function(spawn){
                 this.spawnCreep(this.creepTypes['miner'],{role:'miner', harvest:true, target: this.room.memory.sources[source]})
             }
         }
-        
-        
         var miners = _.filter(Game.creeps, 
             function(o){return (o.memory.role=='miner' &&  o.room.name == roomname)})
         console.log('all miners:' + miners)
-        //
     }
     this.run = function() {
         this.room = this.spawn.room;
         if (Game.time % 10 == 0) this.report();
         this.cleanMemory();
         this.countCreeps();
-        //if (this.isBaseHarvesterRequired) this.spawnCreep(this.creepTypes['baseharvester'],{role:'harvester', harvest:true});
+        if (this.isBaseHarvesterRequired) this.spawnCreep(this.creepTypes['baseharvester'],{role:'harvester', harvest:true});
         if (this.isHarvesterRequired()) this.spawnCreep(this.creepTypes['harvester'],{role:'harvester', harvest:true});
         else {
             if (this.isMinerRequired()) this.spawnCreepMiner();
