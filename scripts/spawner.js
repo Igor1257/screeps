@@ -86,6 +86,7 @@ var spawner = function(spawn){
         else return false;
     }
     this.isBaseHarvesterRequired = function(){
+        console.log(arguments.callee.name);
         console.log('creeps in room: ' + this.creepsInCurrentRoom);
         if (this.creepsInCurrentRoom == 0) return true;
         else return false;
