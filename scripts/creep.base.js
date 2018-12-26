@@ -179,6 +179,7 @@ var creepBase = function(creep){
                 this.creep.moveTo(links[index], {visualizePathStyle: {stroke: '#ffaa00'}});    
     };
     this.withdrawStorage = function(target){
+        console.log(target.pos + ' ' target.room.name)
         if(this.creep.withdraw(target) == ERR_NOT_IN_RANGE) 
                 this.creep.moveTo(target, {visualizePathStyle: {stroke: '#ffaa00'}});    
     };
