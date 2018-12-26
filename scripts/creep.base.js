@@ -82,7 +82,7 @@ var creepBase = function(creep){
         return sourcesMatrix[result.name];
     }
     this.getStorageValue = function(storage){
-        let value = 4;
+        let value = 0;
         return value;
     }
     this.getDroppedEnergyValue = function(dropped_resource){
