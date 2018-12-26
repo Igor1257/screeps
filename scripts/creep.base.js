@@ -23,6 +23,7 @@ var creepBase = function(creep){
 	    }
     };
     this.getEnergySource = function(){
+        // составляется список всех источников энергии в комнате
         let sourcesMatrix = [];
         // energy sources
         for (let name in this.creep.room.memory.sources){
@@ -58,6 +59,16 @@ var creepBase = function(creep){
             sourcesMatrix.push(energySource);
         };
         //storages
+        for (let name in this.creep.room.memory.storage){
+             let energySource = {
+                source : null,
+                type: 'storage',
+                value: null
+            }
+            energySource.source =  this.creep.room.memory.storage[name];
+            energySource.value  = this.getStorageValue(this.creep.room.memory.storage[name]);
+            sourcesMatrix.push(energySource);
+        };
 
         Memory.DEBUG = sourcesMatrix;
         let result = {value : 0, name : null};
@@ -66,11 +77,11 @@ var creepBase = function(creep){
                 result.name = name;
             }
         }
-        //console.log('result.name: ' + result.name)
-        //console.log('sourcesMatrix item: ' + sourcesMatrix[result.name])
+        console.log('result.name: ' + result.name)
+        console.log('sourcesMatrix item: ' + sourcesMatrix[result.name])
         return sourcesMatrix[result.name];
     }
-    this.getStorageValue = function(){
+    this.getStorageValue = function(storage){
         let value = 4;
         return value;
     }
@@ -102,6 +113,7 @@ var creepBase = function(creep){
         let currentSource = this.creep.memory.source;
         if (currentSource.type == 'dropped_energy') this.pickupResource(currentSource.source);
         if (currentSource.type == 'source') this.harvestTarget(currentSource.source);
+        if (currentSource.type == 'storage') this.withdrawStorage(currentSource.source);
     }
     this.pickupResource = function(target){
         if(this.creep.pickup(target) == ERR_NOT_IN_RANGE){
@@ -166,13 +178,9 @@ var creepBase = function(creep){
         if(this.creep.withdraw(links[index],RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) 
                 this.creep.moveTo(links[index], {visualizePathStyle: {stroke: '#ffaa00'}});    
     };
-    this.withdrawStorage = function(){
-        var links = this.creep.room.find(FIND_STRUCTURES, {
-                    filter: (structure) => {
-                        return (structure.structureType == STRUCTURE_STORAGE)
-                    }});
-        if(this.creep.withdraw(links[0],RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) 
-                this.creep.moveTo(links[0], {visualizePathStyle: {stroke: '#ffaa00'}});    
+    this.withdrawStorage = function(target){
+        if(this.creep.withdraw(target) == ERR_NOT_IN_RANGE) 
+                this.creep.moveTo(target, {visualizePathStyle: {stroke: '#ffaa00'}});    
     };
     this.withdrawContainers = function(limit=100){
         var targets = this.creep.room.find(FIND_STRUCTURES, {
