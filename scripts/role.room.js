@@ -12,6 +12,7 @@ var roomBase = function(room){
     this.room.memory.dropped_resources =  this.room.find(FIND_DROPPED_RESOURCES);
     this.room.memory.towers = this.room.find(FIND_STRUCTURES, {filter: (structure) => {return structure.structureType == STRUCTURE_TOWER}});
     this.room.memory.containers = this.room.find(FIND_STRUCTURES, {filter: (structure) => {return (structure.structureType == STRUCTURE_CONTAINER)}});
+    this.room.memory.storage = this.room.find(FIND_STRUCTURES, {filter: (structure) => {return (structure.structureType == STRUCTURE_STORAGE)}});
     //this.room.memory.spawns =  _.filter(this.room.memory.structures,function (o) {return o.structureType == 'spawn'})
 }
 
